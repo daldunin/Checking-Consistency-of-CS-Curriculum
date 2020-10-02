@@ -16,12 +16,13 @@
 import sys
 import numpy
 
+global clock
 
 def acyclic_single(adj):
     isacyclic = 1
 
     explore(0)
-    # print(post)
+
     for (v1, v2) in edges:
         if post[v1 - 1] <= post[v2 - 1]: # according to theorem
             isacyclic = 0
@@ -35,7 +36,7 @@ def acyclic(adj):
     for v in range(0, len(adj)):
         if not visited[v]:
             explore(v)
-    # print(post)
+
     for (v1, v2) in edges:
         if post[v1 - 1] <= post[v2 - 1]:
             isacyclic = 0
@@ -43,8 +44,6 @@ def acyclic(adj):
     return isacyclic
 
 def explore(v):
-    # print('v: ', v)
-    # print('clock: ', clock)
     visited[v] = 1
     for w in adj[v]:
         if not visited[w]:
@@ -53,7 +52,6 @@ def explore(v):
 
 
 def postvisit(v):
-    global clock
     clock = clock + 1
     post[v] = clock
 
